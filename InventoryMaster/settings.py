@@ -79,10 +79,23 @@ WSGI_APPLICATION = 'InventoryMaster.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
+# PostgreSQL 指令:GRANT ALL PRIVILEGES ON DATABASE myproject TO myprojectuser;
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'inventory_master',
+        'USER': 'admin',
+        'PASSWORD': '12345678',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -109,7 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LANGUAGE_CODE = 'zh-tw'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
@@ -119,9 +132,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-LOCALE_PATHS = (
-    os.path.join(BASE_DIR, 'locale')
-)
 
 
 # Static files (CSS, JavaScript, Images)
@@ -130,3 +140,7 @@ LOCALE_PATHS = (
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 STATICFILES_DIRS = (os.path.join('static'), )
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_AGE = 1800
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
