@@ -8,4 +8,5 @@ class User(models.Model):
     email = models.EmailField(max_length=254)
     password = models.CharField(max_length=255)
     is_active = models.BooleanField()
+    last_login = models.DateTimeField(null=True)
 

@@ -149,9 +149,13 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_AGE = 1800
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'will770210@gmail.com'
+EMAIL_HOST_PASSWORD = 'pqhdccwwdobltzdk'
+EMAIL_PORT = 587
+
 # 导入模块
-
-
 # LOGGING = {
 #     'version': 1,
 #     'disable_existing_loggers': True,

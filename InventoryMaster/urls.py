@@ -18,12 +18,14 @@ from django.conf.urls import include, url
 from django.contrib import admin
 admin.autodiscover()
 
-from user.views import login_view, register, forgot_password_view
+from user.views import login, register, userActivate, forgot_password_view, testMail
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     # url(r'^user/$', user.views.login_view, name='user'),
-    url(r'^user/login/', login_view, name='login'),
+    url(r'^user/login/', login, name='login'),
     url(r'^user/register/', register, name='register'),
-    url(r'^user/forgotPassword/', forgot_password_view, name='forgot_password')
+    url(r'^user/forgotPassword/', forgot_password_view, name='forgot_password'),
+    url(r'^userActivate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', userActivate, name='userActivate'),
+    url(r'^user/testMail', testMail)
 ]
