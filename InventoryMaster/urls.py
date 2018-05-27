@@ -18,12 +18,12 @@ from django.conf.urls import include, url
 from django.contrib import admin
 admin.autodiscover()
 
-from user.views import login_view, register_view, forgot_password_view
+from user.views import login_view, register, forgot_password_view
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     # url(r'^user/$', user.views.login_view, name='user'),
     url(r'^user/login/', login_view, name='login'),
-    url(r'^user/register/', register_view, name='register'),
+    url(r'^user/register/', register, name='register'),
     url(r'^user/forgotPassword/', forgot_password_view, name='forgot_password')
 ]
