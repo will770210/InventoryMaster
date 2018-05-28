@@ -18,7 +18,9 @@ from django.conf.urls import include, url
 from django.contrib import admin
 admin.autodiscover()
 
-from user.views import login, register, userActivate, forgot_password_view, testMail
+from user.views import login, register, userActivate, forgot_password_view, testMail,home
+
+from store.views import createStore,joinStore
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -27,5 +29,9 @@ urlpatterns = [
     url(r'^user/register/', register, name='register'),
     url(r'^user/forgotPassword/', forgot_password_view, name='forgot_password'),
     url(r'^userActivate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', userActivate, name='userActivate'),
-    url(r'^user/testMail', testMail)
+    url(r'^user/home/', home, name='home'),
+    url(r'^user/testMail', testMail),
+
+    url(r'^store/create/', createStore , name='createStore'),
+    url(r'^store/join/', joinStore, name='joinStore'),
 ]

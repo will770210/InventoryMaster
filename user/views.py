@@ -18,9 +18,11 @@ from user.tokens import *
 
 
 def login(request):
-    return render(request, 'user_login.html', {
-        'data': "hello",
-    })
+    if request.method == 'POST':
+
+        return render(request, 'user_home.html', {})
+    else:
+        return render(request, 'user_login.html', {'data': "hello"})
 
 
 def register(request):
@@ -72,6 +74,10 @@ def userActivate(request, uidb64, token):
         return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
         return HttpResponse('Activation link is invalid!')
+
+
+def home(request):
+    return render(request, 'user_home.html', {})
 
 
 def testMail(request):

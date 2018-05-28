@@ -1,0 +1,36 @@
+{% extends 'dark.html' %}
+
+{% block title %} 庫存大師 - 建立商店 {% endblock %}
+
+{% block body %}
+<div class="card card-register mx-auto mt-5">
+
+      <div class="card-header">第一步，建立您的商店</div>
+      <div class="card-body">
+        <form method="post" action="">
+
+        {% csrf_token %}
+        {% for hidden_field in form.hidden_fields %}
+            {{ hidden_field }}
+        {% endfor %}
+        {% for field in form.visible_fields %}
+            <div class="form-group">
+                <div class="form-row">
+                  <div class="col-md-12">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.help_text %}
+                            <small class="form-text text-muted">{{ field.help_text }}</small>
+                        {% endif %}
+                  </div>
+                </div>
+            </div>
+        {% endfor %}
+            <button type="button " class="btn btn-danger btn-block">取消</button>
+            <button type="submit" class="btn btn-primary btn-block">繼續</button>
+        </form>
+
+      </div>
+    </from>
+    </div>
+{% endblock %}
