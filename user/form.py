@@ -46,3 +46,19 @@ class RegisterForm(forms.Form):
         )
     )
 
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError("此Email已註冊過")
+
+        return email
+
+    def clean_checkPassword(self):
+        password = self.cleaned_data['password']
+        checkPassword = self.cleaned_data['checkPassword']
+
+        if password != checkPassword:
+            raise forms.ValidationError("確認密碼錯誤，請重新輸入")
+
+        return password
+

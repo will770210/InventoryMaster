@@ -20,9 +20,13 @@ admin.autodiscover()
 
 from user.views import login, register, userActivate, forgot_password_view, testMail,home
 
-from store.views import createStore,joinStore
+from store.views import createStore, joinStore, listStore, deleteStore, updateStore
+
+from product.views import createProduct, updateProduct, listProduct, deleteProduct
+
 
 urlpatterns = [
+    url(r'^/',login),
     url(r'^admin/', include(admin.site.urls)),
     # url(r'^user/$', user.views.login_view, name='user'),
     url(r'^user/login/', login, name='login'),
@@ -34,4 +38,12 @@ urlpatterns = [
 
     url(r'^store/create/', createStore , name='createStore'),
     url(r'^store/join/', joinStore, name='joinStore'),
+    url(r'^store/list/', listStore, name='listStore'),
+    url(r'^store/delete/(?P<storeId>\d+)/$', deleteStore, name='deleteStore'),
+    url(r'^store/update/(?P<storeId>\d+)/$', updateStore, name='updateStore'),
+
+    url(r'^product/create/(?P<storeId>\d+)/$', createProduct, name='createProduct'),
+    url(r'^product/update/(?P<productId>\d+)/$', updateProduct, name='updateProduct'),
+    url(r'^product/list/(?P<storeId>\d+)/$', listProduct, name='listProduct'),
+    url(r'^product/delete/(?P<productId>\d+)/$', deleteProduct, name='deleteProduct'),
 ]

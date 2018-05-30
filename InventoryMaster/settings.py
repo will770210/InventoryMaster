@@ -28,7 +28,7 @@ SECRET_KEY = '14d1s6$n2dov6z!75rzwzrb&p0g)*zfpew($^sn$n*3fldup#w'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['inventorymaster001.herokuapp.com']
+ALLOWED_HOSTS = ['inventorymaster001.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -133,9 +133,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hant'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Taipei'
 
 USE_I18N = True
 

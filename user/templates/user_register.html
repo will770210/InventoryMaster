@@ -2,6 +2,7 @@
 
 {% block title %} 庫存大師 - 註冊 {% endblock %}
 {% block body %}
+
 <div class="card card-register mx-auto mt-5">
 
       <div class="card-header">註冊帳號 </div>
@@ -9,6 +10,7 @@
         <form method="post" action="">
 
         {% csrf_token %}
+        {% include 'message.html' %}
         {% for hidden_field in form.hidden_fields %}
             {{ hidden_field }}
         {% endfor %}

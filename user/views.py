@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,render_to_response,redirect
 from django import forms
-from user.models import User
+from user.models import *
+from store.models import *
 from user.form import *
 from django.http import HttpResponse
 from django.utils.encoding import force_bytes, force_text
@@ -8,7 +9,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
-
+from django.template import RequestContext
 from user.tokens import *
 
 # import logging
@@ -19,10 +20,23 @@ from user.tokens import *
 
 def login(request):
     if request.method == 'POST':
+        email = request.POST.get("email")
+        password = request.POST.get('password')
+        user = User.objects.filter(email=email, password=password).first()
 
-        return render(request, 'user_home.html', {})
-    else:
-        return render(request, 'user_login.html', {'data': "hello"})
+        if user is not None and user.is_active==False:
+            return render(request, 'user_active_send.html', {})
+        elif user is not None:
+            request.session['user'] = user
+            storeCount = Store_User_Relation.objects.filter(user=user, is_manager=True).values_list("store").count()
+
+            if storeCount == 0:
+                return render(request, 'user_home.html', {})
+            else:
+                return redirect('listStore')
+
+    return render(request, 'user_login.html', {})
+
 
 
 def register(request):

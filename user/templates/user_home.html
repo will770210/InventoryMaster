@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-      <h1 class="display-5" style="color:white;">歡迎加入本平台，請選擇您的身分開始商店營運！</h1>
+      <h1 class="display-5" style="color:white;">{{ request.session.user.name }} 歡迎加入本平台，請選擇您的身分開始商店營運！</h1>
 {#      <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It's built with default Bootstrap components and utilities with little customization.</p>#}
     </div>
 <div class="card-deck mb-3 text-center mx-auto mt-5">

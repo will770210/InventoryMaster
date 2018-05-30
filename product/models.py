@@ -4,7 +4,7 @@ from store.models import *
 
 class Product_Category(models.Model):
     store = models.ForeignKey(Store)
-    parent_category = models.ForeignKey('self')
+    parent_category = models.ForeignKey('self', null=True)
     level_of_product = models.IntegerField(default=0)
     name = models.CharField(max_length=255)
     enable = models.BooleanField(default=True)
