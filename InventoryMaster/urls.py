@@ -18,23 +18,26 @@ from django.conf.urls import include, url
 from django.contrib import admin
 admin.autodiscover()
 
-from user.views import login, register, userActivate, forgot_password_view, testMail,home
+from user.views import login, register, userResetPassword, userSetNewPassword, userActivate, forgotPassword, testMail,home
 
 from store.views import createStore, joinStore, listStore, deleteStore, updateStore
 
-from product.views import createProduct, updateProduct, listProduct, deleteProduct
+from product.views import createProduct, updateProduct, listProduct, deleteProduct, createProductCategory, updateProductCategory, listProductCategory, deleteProductCategory
 
 
 urlpatterns = [
     url(r'^/',login),
     url(r'^admin/', include(admin.site.urls)),
     # url(r'^user/$', user.views.login_view, name='user'),
-    url(r'^user/login/', login, name='login'),
+    url(r'^user/login/$', login, name='login'),
     url(r'^user/register/', register, name='register'),
-    url(r'^user/forgotPassword/', forgot_password_view, name='forgot_password'),
-    url(r'^userActivate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', userActivate, name='userActivate'),
+    url(r'^user/forgotPassword/', forgotPassword, name='forgotPassword'),
+    url(r'^user/userActivate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', userActivate, name='userActivate'),
+    url(r'^user/resetPassword/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', userResetPassword, name='userResetPassword'),
+
     url(r'^user/home/', home, name='home'),
-    url(r'^user/testMail', testMail),
+    url(r'^user/testMail/', testMail),
+    url(r'^user/setNewPassword/', userSetNewPassword, name='userSetNewPassword'),
 
     url(r'^store/create/', createStore , name='createStore'),
     url(r'^store/join/', joinStore, name='joinStore'),
@@ -46,4 +49,12 @@ urlpatterns = [
     url(r'^product/update/(?P<productId>\d+)/$', updateProduct, name='updateProduct'),
     url(r'^product/list/(?P<storeId>\d+)/$', listProduct, name='listProduct'),
     url(r'^product/delete/(?P<productId>\d+)/$', deleteProduct, name='deleteProduct'),
+
+    url(r'^category/create/(?P<storeId>\d+)/$', createProductCategory, name='createProductCategory'),
+    url(r'^category/update/(?P<categoryId>\d+)/$', updateProductCategory, name='updateProductCategory'),
+    url(r'^category/list/(?P<storeId>\d+)/$', listProductCategory, name='listProductCategory'),
+    url(r'^category/delete/(?P<categoryId>\d+)/$', deleteProductCategory, name='deleteProductCategory'),
+
+
+
 ]

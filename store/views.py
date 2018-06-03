@@ -7,7 +7,7 @@ import uuid
 
 def listStore(request):
     user = request.session.get('user')
-    relations = Store_User_Relation.objects.filter(user=user, is_manager=True).select_related('store')
+    relations = Store_User_Relation.objects.filter(user=user, is_manager=True, store__enable=True)
 
     stores = list([relation.store for relation in relations])
 
@@ -18,11 +18,14 @@ def listStore(request):
 def deleteStore(request, storeId):
     user = request.session.get('user')
     store = Store.objects.filter(pk=storeId).first()
-    store.delete()
+    store.enable = False
+    store.save()
     return redirect('listStore')
+
 
 def updateStore(request, storeId):
     pass
+
 
 def createStore(request):
     if request.method == 'POST':
@@ -41,12 +44,11 @@ def createStore(request):
                 user=request.session.get('user'),
                 store=store,
                 is_manager=True
-
             )
             store_user_releation.save()
 
             form = CreateProductForm()
-            return render(request, 'product_create_product.html', {'form': form,'store':store})
+            return render(request, 'product_create_product.html', {'form': form, 'store': store})
 
     else:
         form = CreateStoreForm()

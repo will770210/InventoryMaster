@@ -1,11 +1,11 @@
 {% extends 'dark.html' %}
 
-{% block title %} 庫存大師 - 建立產品類別 {% endblock %}
+{% block title %} 庫存大師 - 建立產品 {% endblock %}
 
 {% block body %}
 <div class="card card-register mx-auto mt-5">
 
-      <div class="card-header">建立產品類別</div>
+      <div class="card-header">第二步，建立您的產品</div>
       <div class="card-body">
         <form method="post" action="{% url 'createProduct' storeId=store.pk %}">
 

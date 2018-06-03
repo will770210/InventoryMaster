@@ -17,35 +17,32 @@
 
               <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
               <thead>
-
                 <tr>
                     <th>刪除</th>
                     <th>商店名稱</th>
                     <th>商店電話</th>
                     <th>商店地址</th>
+                    <th>商店代碼</th>
                     <th>更新</th>
                     <th>產品列表</th>
-
                 </tr>
-
-
               </thead>
 
               <tbody>
 
               {% for s in stores %}
-                <tr>
-                  <th> <a class="btn btn-danger " href="{% url 'deleteStore' storeId=s.pk %}">刪除</a></th>
-                  <th> {{ s.name }}</th>
-                  <th> {{ s.phone }}</th>
-                  <th> {{ s.address }}</th>
-                  <th> <a class="btn btn-success" href="{% url 'updateStore' storeId=s.pk%}">更新</a></th>
-                  <th> <a class="btn btn-info" href="{% url 'listProduct' storeId=s.pk%}">產品列表</a></th>
-
-                </tr>
+                  <tr>
+                    <th><a class="btn btn-danger " href="{% url 'deleteStore' storeId=s.pk %}">刪除</a></th>
+                    <th>{{ s.name }}</th>
+                    <th>{{ s.phone }}</th>
+                    <th>{{ s.address }}</th>
+                    <th>{{ s.store_code }}</th>
+                    <th><a class="btn btn-success" href="{% url 'updateStore' storeId=s.pk%}">更新</a></th>
+                    <th><a class="btn btn-info" href="{% url 'listProduct' storeId=s.pk%}">產品列表</a></th>
+                  </tr>
+              {% empty %}
+                  <tr><th colspan="7">沒有商店資料</th></tr>
               {% endfor %}
-
-
 
               </tbody>
             </table>

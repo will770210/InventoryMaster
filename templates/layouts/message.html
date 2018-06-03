@@ -1,23 +1,13 @@
-{% if messages %}
-    {% for message in messages %}
-      <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
-    {% endfor %}
-  {% endif %}
+{% extends 'dark.html' %}
 
-  {% if form.errors %}
-    <div class="alert alert-danger" role="alert">
-{#      <h4>訊息</h4>#}
-      <ul>
-        {% for field in form %}
-          {% if field.errors %}
-            {% for error in field.errors %}
-              <li><a href="#id_{{ field.name }}" class="error">{{ error|escape }}</a></li>
-            {% endfor %}
-          {% endif %}
-        {% endfor %}
-      </ul>
-      {% if form.non_field_errors %}
-        {{ form.non_field_errors }}
-      {% endif %}
+{% block title %} 庫存大師 - {{ title }} {% endblock %}
+{% block body %}
+    <div class="card card-login mx-auto mt-5">
+      <div class="card-header">{{ title }}</div>
+      <div class="card-body">
+          {{ content }}
+
+          <button type="button" class="btn btn-primary btn-block" onclick="windows.location.href='{% url 'login' %}'">重新登入</button>
+      </div>
     </div>
-  {% endif %}
+{% endblock %}

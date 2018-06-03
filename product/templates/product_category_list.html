@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %} 庫存大師 - 產品列表 {% endblock %}
+{% block header %}
+{% endblock %}
+{% block body %}
+
+    <div class="card">
+      <h5 class="card-header">商店資訊 <a class="btn btn-danger" href="{% url 'updateStore' storeId=store.pk %}">更新</a></h5>
+      <div class="card-body">
+        <h5 class="card-title">{{ store.name }}</h5>
+        <p class="card-text">
+            代碼: {{ store.store_code }}
+            電話: {{ store.phone }}<br>
+            地址: {{ store.address }}
+        </p>
+
+      </div>
+    </div>
+    <br>
+    <br>
+
+    <div class="card">
+        <h5 class="card-header">
+          產品列表 <a class="btn btn-danger" href="{% url 'createProduct' storeId=store.pk %}">新增產品</a>
+
+        </h5>
+
+        <div class="card-body">
+          <div class="table-responsive">
+
+              <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+              <thead>
+                <tr>
+                    <th rowspan="1" colspan="1">刪除</th>
+                    <th rowspan="1" colspan="1">產品名稱</th>
+                    <th rowspan="1" colspan="1">產品類別</th>
+                    <th rowspan="1" colspan="1">更新</th>
+
+                </tr>
+              </thead>
+              <tbody>
+
+              {% for p in products %}
+                <tr>
+                  <th> <a class="btn btn-danger" href="{% url 'deleteProduct' productId=p.pk %}">刪除</a></th>
+                  <th> {{ p.name }}</th>
+                  <th> {{ p.category.name }}</th>
+                  <th> <a class="btn btn-info" href="{% url 'updateProduct' productId=p.pk %}">更新</a></th>
+                </tr>
+              {% empty %}
+                  <tr><td colspan="4">此商店無產品資料</td></tr>
+              {% endfor %}
+
+
+
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+
+</div>
+    <br><br><a class="btn btn-info" href="{% url 'listStore' %}">回商店列表</a>
+{% endblock %}

@@ -1,7 +1,7 @@
 {% autoescape off %}
-Hi {{ user.username }},
+{{ user.username }} 您好,
 
-    請點下列連結啟用帳號，以完成註冊。
+    請點下列連結啟用帳號，以完成庫存大師註冊。
 
-http://{{ domain }}{% url 'userActivate' uidb64=uid token=token %}
+    http://{{ domain }}{% url 'userActivate' uidb64=uid token=token %}
 {% endautoescape %}
