@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 # Create your views here.
 from store.form import *
 from store.models import *
 from product.form import *
 import uuid
+from django.views.generic import UpdateView
 
 def listStore(request):
     user = request.session.get('user')
@@ -24,12 +25,18 @@ def deleteStore(request, storeId):
 
 
 def updateStore(request, storeId):
-    pass
+    store = get_object_or_404(Store, pk=storeId)
+    form = StoreForm(request.POST or None, instance=store)
+    if form.is_valid():
+        form.save()
+        return redirect('listStore')
+    return render(request, 'store_update_from.html', {'form': form})
+
 
 
 def createStore(request):
     if request.method == 'POST':
-        form = CreateStoreForm(request.POST)
+        form = StoreForm(request.POST or None)
         if form.is_valid():
             store = Store.objects.create(
                 name=form.cleaned_data['name'],
@@ -53,7 +60,7 @@ def createStore(request):
     else:
         form = CreateStoreForm()
 
-    return render(request, 'store_create_store.html', {'form': form})
+    return render(request, 'store_create_form.html', {'form': form})
 
 
 def joinStore(request):

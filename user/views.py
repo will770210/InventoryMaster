@@ -41,8 +41,6 @@ def login(request):
     return render(request, 'user_login.html')
 
 
-
-
 def register(request):
     if request.method == 'POST':
         # logger.info('request.method')

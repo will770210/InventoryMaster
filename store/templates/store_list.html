@@ -8,9 +8,9 @@
 {% endblock %}
 {% block body %}
 <div class="card mb-3">
-        <div class="card-header">
-          <i class="fa fa-table"></i>商店列表
-        </div>
+        <h5 class="card-header">
+          商店列表  <a class="btn btn-danger" href="{% url 'createStore' %}">新增商店</a>
+        </h5>
 
         <div class="card-body">
           <div class="table-responsive">
@@ -32,13 +32,13 @@
 
               {% for s in stores %}
                   <tr>
-                    <th><a class="btn btn-danger " href="{% url 'deleteStore' storeId=s.pk %}">刪除</a></th>
+                    <th><a class="btn btn-danger " href="{% url 'deleteStore' storeId=s.id %}">刪除</a></th>
                     <th>{{ s.name }}</th>
                     <th>{{ s.phone }}</th>
                     <th>{{ s.address }}</th>
                     <th>{{ s.store_code }}</th>
-                    <th><a class="btn btn-success" href="{% url 'updateStore' storeId=s.pk%}">更新</a></th>
-                    <th><a class="btn btn-info" href="{% url 'listProduct' storeId=s.pk%}">產品列表</a></th>
+                    <th><a class="btn btn-success" href="{% url 'updateStore' storeId=s.id%}">更新</a></th>
+                    <th><a class="btn btn-info" href="{% url 'listProduct' storeId=s.id%}">產品列表</a></th>
                   </tr>
               {% empty %}
                   <tr><th colspan="7">沒有商店資料</th></tr>
