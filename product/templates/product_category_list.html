@@ -1,9 +1,19 @@
 {% extends 'base.html' %}
 
-{% block title %} 庫存大師 - 產品列表 {% endblock %}
+{% block title %} 庫存大師 - 產品類別列表 {% endblock %}
 {% block header %}
 {% endblock %}
 {% block body %}
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'listStore' %}">商店列表</a>
+        </li>
+        <li class="breadcrumb-item active">產品類別列表</li>
+      </ol>
 
     <div class="card">
       <h5 class="card-header">商店資訊 <a class="btn btn-danger" href="{% url 'updateStore' storeId=store.pk %}">更新</a></h5>

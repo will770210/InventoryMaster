@@ -18,11 +18,11 @@ from django.conf.urls import include, url
 from django.contrib import admin
 admin.autodiscover()
 
-from user.views import login, register, userResetPassword, userSetNewPassword, userActivate, forgotPassword, testMail,home
+from user.views import login, logout,  register, userResetPassword, userSetNewPassword, userActivate, forgotPassword, testMail,home
 
 from store.views import createStore, joinStore, listStore, deleteStore, updateStore
 
-from product.views import createProduct, updateProduct, listProduct, deleteProduct, createProductCategory, updateProductCategory, listProductCategory, deleteProductCategory
+from product.views import createProduct,createProductFirst, updateProduct, listProduct, deleteProduct, createProductCategory, updateProductCategory, listProductCategory, deleteProductCategory
 
 
 urlpatterns = [
@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     # url(r'^user/$', user.views.login_view, name='user'),
     url(r'^user/login/$', login, name='login'),
+    url(r'^user/logout/$', logout, name='logout'),
     url(r'^user/register/', register, name='register'),
     url(r'^user/forgotPassword/', forgotPassword, name='forgotPassword'),
     url(r'^user/userActivate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', userActivate, name='userActivate'),
@@ -46,6 +47,7 @@ urlpatterns = [
     url(r'^store/update/(?P<storeId>\d+)/$', updateStore, name='updateStore'),
 
     url(r'^product/create/(?P<storeId>\d+)/$', createProduct, name='createProduct'),
+    url(r'^product/createFirest/(?P<storeId>\d+)/$', createProductFirst, name='createProductFirst'),
     url(r'^product/update/(?P<productId>\d+)/$', updateProduct, name='updateProduct'),
     url(r'^product/list/(?P<storeId>\d+)/$', listProduct, name='listProduct'),
     url(r'^product/delete/(?P<productId>\d+)/$', deleteProduct, name='deleteProduct'),

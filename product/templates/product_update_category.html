@@ -1,10 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %} 庫存大師 - 編輯產品類別 {% endblock %}
+
+{% block body %}
+          <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'listStore' %}">商店列表</a>
+        </li>
+          <li class="breadcrumb-item">
+          <a href="{% url 'listProduct' storeId=store.id %}">產品列表</a>
+        </li>
+        <li class="breadcrumb-item active">編輯產品類別</li>
+      </ol>
+<div class="card card-register mx-auto mt-5">
+
+      <div class="card-header">編輯產品類別</div>
+      <div class="card-body">
+        <form method="post" action="{% url 'createProductCategory' storeId=store.id %}">
+
+        {% csrf_token %}
+        {% for hidden_field in form.hidden_fields %}
+            {{ hidden_field }}
+        {% endfor %}
+        {% for field in form.visible_fields %}
+            <div class="form-group">
+                <div class="form-row">
+                  <div class="col-md-12">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.help_text %}
+                            <small class="form-text text-muted">{{ field.help_text }}</small>
+                        {% endif %}
+                  </div>
+                </div>
+            </div>
+        {% endfor %}
+            <a class="btn btn-danger btn-block" href="{% url 'listProduct' storeId=store.id %}">取消</a>
+            <button type="submit" class="btn btn-primary btn-block">確定</button>
+        </form>
+
+      </div>
+    </from>
+    </div>
+{% endblock %}

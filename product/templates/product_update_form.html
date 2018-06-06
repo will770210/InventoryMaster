@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
-{% block title %} 庫存大師 - 建立產品 {% endblock %}
+{% block title %} 庫存大師 - 編輯產品 {% endblock %}
 
 {% block body %}
-      <ol class="breadcrumb">
+    <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a href="">Dashboard</a>
         </li>
@@ -13,14 +13,14 @@
           <li class="breadcrumb-item">
           <a href="{% url 'listProduct' storeId=store.id %}">產品列表</a>
         </li>
-        <li class="breadcrumb-item active">建立產品</li>
-      </ol>
-
+        <li class="breadcrumb-item active">編輯產品</li>
+    </ol>
+    
 <div class="card card-register mx-auto mt-5">
 
-      <div class="card-header">建立您的產品</div>
+      <div class="card-header">編輯的產品</div>
       <div class="card-body">
-        <form method="post" action="{% url 'createProduct' storeId=store.id %}">
+        <form method="post" action="{% url 'updateProduct' productId=product.id %}">
 
         {% csrf_token %}
         {% for hidden_field in form.hidden_fields %}
@@ -39,7 +39,7 @@
                 </div>
             </div>
         {% endfor %}
-            <a class="btn btn-danger btn-block" href="{% url 'listProduct' storeId=store.id %}">取消</a>
+            <a class="btn btn-danger btn-block" href="{% url 'listProduct' storeId=product.store.id %}">取消</a>
             <button type="submit" class="btn btn-primary btn-block">確定</button>
         </form>
 

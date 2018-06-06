@@ -17,6 +17,9 @@ from user.tokens import *
 
 # logger = logging.getLogger('django')
 
+def logout(request):
+    request.session['user'] = None
+    return redirect('login')
 
 def login(request):
 

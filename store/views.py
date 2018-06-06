@@ -19,8 +19,10 @@ def listStore(request):
 def deleteStore(request, storeId):
     user = request.session.get('user')
     store = Store.objects.filter(pk=storeId).first()
-    store.enable = False
-    store.save()
+    relations = Store_User_Relation.objects.filter(store=store, user=user, is_manager=True, store__enable=True)
+    if relations.count() > 0:
+        store.enable = False
+        store.save()
     return redirect('listStore')
 
 
@@ -55,7 +57,7 @@ def createStore(request):
             store_user_releation.save()
 
             form = CreateProductForm()
-            return render(request, 'product_create_product.html', {'form': form, 'store': store})
+            return render(request, 'product_create_product_first.html', {'form': form, 'store': store})
 
     else:
         form = CreateStoreForm()

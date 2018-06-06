@@ -7,6 +7,14 @@
 
 {% endblock %}
 {% block body %}
+         <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">
+          商店列表
+        </li>
+      </ol>
 <div class="card mb-3">
         <h5 class="card-header">
           商店列表  <a class="btn btn-danger" href="{% url 'createStore' %}">新增商店</a>

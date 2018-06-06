@@ -4,13 +4,30 @@
 {% block header %}
 {% endblock %}
 {% block body %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'listStore' %}">商店列表</a>
+        </li>
+          <li class="breadcrumb-item active">
+          產品列表
+        </li>
+    </ol>
 
     <div class="card">
       <h5 class="card-header">商店資訊 <a class="btn btn-danger" href="{% url 'updateStore' storeId=store.pk %}">更新</a></h5>
       <div class="card-body">
-        <h5 class="card-title">{{ store.name }}</h5>
+        <h5 class="card-title">店名: {{ store.name }}</h5>
         <p class="card-text">
-            電話: {{ store.phone }}<br>
+            商店代碼: {{ store.store_code }}
+        </p>
+          <p class="card-text">
+            電話: {{ store.phone }}
+        </p>
+          <p class="card-text">
+
             地址: {{ store.address }}
         </p>
 
@@ -58,7 +75,54 @@
 
           </div>
         </div>
+    </div>
+    <br><br>
 
-</div>
-    <br><br><a class="btn btn-info" href="{% url 'listStore' %}">回商店列表</a>
+    <div class="card">
+        <h5 class="card-header">
+          產品類別列表 <a class="btn btn-danger" href="{% url 'createProductCategory' storeId=store.pk %}">新增產品類別</a>
+
+        </h5>
+
+        <div class="card-body">
+          <div class="table-responsive">
+
+              <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+              <thead>
+                <tr>
+                    <th rowspan="1" colspan="1">刪除</th>
+                    <th rowspan="1" colspan="1">階級</th>
+                    <th rowspan="1" colspan="1">類別名稱</th>
+                    <th rowspan="1" colspan="1">父類別名稱</th>
+
+                    <th rowspan="1" colspan="1">更新</th>
+
+                </tr>
+              </thead>
+              <tbody>
+
+              {% for c in categories %}
+                <tr>
+                  <th> <a class="btn btn-danger" href="{% url 'deleteProductCategory' categoryId=c.id %}">刪除</a></th>
+                  <th> {{ c.level_of_product }}</th>
+                  <th> {{ c.name }}</th>
+                  <th> {{ c.parent_category.name }}</th>
+
+                  <th> <a class="btn btn-info" href="{% url 'updateProductCategory' categoryId=c.id %}">更新</a></th>
+                </tr>
+              {% empty %}
+                  <tr><td colspan="4">此商店無產品類別資料</td></tr>
+              {% endfor %}
+
+
+
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+    </div>
+
+    <br><br>
+{#    <a class="btn btn-info" href="{% url 'listStore' %}">回商店列表</a>#}
 {% endblock %}
