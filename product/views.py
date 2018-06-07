@@ -111,7 +111,7 @@ def createProductFirst(request, storeId):
     else:
         form = CreateProductForm()
 
-    return render(request, 'product_create_product.html', {'form': form,'store':store})
+    return render(request, 'product_create_form.html', {'form': form, 'store':store})
 
 
 def createProduct(request, storeId):
@@ -152,7 +152,7 @@ def createProduct(request, storeId):
     else:
         form = ProductForm(request.POST or None, storeId=storeId)
 
-    return render(request, 'product_create_product.html', {'form': form, 'store':store})
+    return render(request, 'product_create_form.html', {'form': form, 'store':store})
 
 
 def createProductCategory(request, storeId):
@@ -177,7 +177,7 @@ def createProductCategory(request, storeId):
             category.save()
             return redirect('listProduct', storeId=storeId)
 
-    return render(request, 'product_create_category.html', {'form':form ,'store':store})
+    return render(request, 'category_create_form.html', {'form':form , 'store':store})
 
 def updateProductCategory(request,categoryId):
 
@@ -199,7 +199,7 @@ def updateProductCategory(request,categoryId):
 
             return redirect('listProduct', storeId=category.store.id)
 
-    return render(request, 'product_update_category.html', {'form': form, 'store': category.store})
+    return render(request, 'category_update_form.html', {'form': form, 'store': category.store})
 
 
 def listProductCategory(request,storeId):
@@ -215,10 +215,9 @@ def deleteProductCategory(request,categoryId):
     relations = Store_User_Relation.objects.filter(store=store, user=user, is_manager=True)
     if relations.count() > 0:
         products = Product.objects.filter(category=category,enable=True)
-        parent_categories = Product_Category.objects.filter(parent_category=category,enable=True)
-        if products.count()==0 and parent_categories.count()==0:
+        parent_categories = Product_Category.objects.filter(parent_category=category, enable=True)
+        if products.count() == 0 and parent_categories.count() == 0:
             category.enable = False
             category.save()
-
 
     return redirect('listProduct', storeId=store.id)

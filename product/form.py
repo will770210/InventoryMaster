@@ -81,8 +81,7 @@ class ProductForm(forms.ModelForm):
             'name': True,
         }
 
-
-    def __init__(self,*args,**kwargs):
+    def __init__(self, *args, **kwargs):
         storeId = kwargs.pop('storeId')
         super(ProductForm, self).__init__(*args, **kwargs)
 
@@ -113,7 +112,7 @@ class ProductCategoryForm(forms.ModelForm):
     class Meta:
         model = Product_Category
 
-        fields = ('name','parent_category')  # Note that we didn't mention user field here.
+        fields = ('name', 'parent_category')  # Note that we didn't mention user field here.
 
         widgets = {
             'name': forms.TextInput(

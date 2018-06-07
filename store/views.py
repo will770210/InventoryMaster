@@ -57,7 +57,7 @@ def createStore(request):
             store_user_releation.save()
 
             form = CreateProductForm()
-            return render(request, 'product_create_product_first.html', {'form': form, 'store': store})
+            return render(request, 'product_create_first_form.html', {'form': form, 'store': store})
 
     else:
         form = CreateStoreForm()
