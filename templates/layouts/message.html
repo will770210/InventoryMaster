@@ -7,7 +7,7 @@
       <div class="card-body">
           {{ content }}
 
-          <button type="button" class="btn btn-primary btn-block" onclick="windows.location.href='{% url 'login' %}'">重新登入</button>
+          <a type="button" class="btn btn-primary btn-block" href="{% url 'login' %}">重新登入</a>
       </div>
     </div>
 {% endblock %}

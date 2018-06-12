@@ -18,7 +18,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 admin.autodiscover()
 
-from user.views import login, logout,  register, userResetPassword, userSetNewPassword, userActivate, forgotPassword, testMail,home
+from user.views import login, logout,  register, userResetPassword, userSetNewPassword, userActivate, forgotPassword, testMail, home, reSendUserActiveMail
 
 from store.views import createStore, joinStore, listStore, deleteStore, updateStore
 
@@ -35,7 +35,7 @@ urlpatterns = [
     url(r'^user/forgotPassword/', forgotPassword, name='forgotPassword'),
     url(r'^user/userActivate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', userActivate, name='userActivate'),
     url(r'^user/resetPassword/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', userResetPassword, name='userResetPassword'),
-
+    url(r'^user/reSendActiveMail/',reSendUserActiveMail,'reSendUserActiveMail'),
     url(r'^user/home/', home, name='home'),
     url(r'^user/testMail/', testMail),
     url(r'^user/setNewPassword/', userSetNewPassword, name='userSetNewPassword'),

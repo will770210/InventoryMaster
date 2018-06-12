@@ -17,9 +17,11 @@ from user.tokens import *
 
 # logger = logging.getLogger('django')
 
+
 def logout(request):
     request.session['user'] = None
     return redirect('login')
+
 
 def login(request):
 
@@ -56,24 +58,47 @@ def register(request):
                 password=form.cleaned_data['password'],
                 is_active=False)
 
-            #send user activate mail
-            current_site = get_current_site(request)
-            message = render_to_string('user_active_mail.html', {
-                'user': user, 'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': account_activation_token.make_token(user),
-            })
-            # Sending activation link in terminal
-            # user.email_user(subject, message)
-            mail_subject = '[庫存大師] 啟用帳號'
-            to_email = form.cleaned_data.get('email')
-            email = EmailMessage(mail_subject, message, to=[to_email])
-            email.send()
+            sendUserActiveMail(request,user)
 
-            return render(request, 'user_active_send.html', {})
+            return render(request, 'user_active_send.html', {'id':user.id})
     else:
         form = RegisterForm()
     return render(request, 'user_register.html', {'form': form})
+
+def sendUserActiveMail(request,user):
+    # send user activate mail
+    current_site = get_current_site(request)
+    message = render_to_string('user_active_mail.html', {
+        'user': user,
+        'domain': current_site.domain,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': account_activation_token.make_token(user),
+    })
+    # Sending activation link in terminal
+    # user.email_user(subject, message)
+    mail_subject = '[庫存大師] 啟用帳號'
+    to_email = user.email
+    email = EmailMessage(mail_subject, message, to=[to_email])
+    email.send()
+
+def reSendUserActiveMail(request):
+    if request.method == 'POST':
+        id = request.POST.get('id')
+        user = User.objects.filter(id=id).first()
+
+        if user is not None:
+            if user.is_active==True:
+                title = '帳號啟用'
+                content = '您的帳號已經啟用成功，請重進行登入'
+                return render(request, 'message.html', {title: title, content: content})
+
+            elif user.is_active==False:
+                sendUserActiveMail(request,user)
+                return render(request, 'user_active_send.html', {'id':user.id})
+
+    title = '帳號啟用'
+    content = '帳號啟用異常，請您重試一次或系統管理員聯絡'
+    return render(request, 'message.html', {title: title, content: content})
 
 
 def forgotPassword(request):

@@ -51,6 +51,7 @@
                     <th rowspan="1" colspan="1">刪除</th>
                     <th rowspan="1" colspan="1">產品名稱</th>
                     <th rowspan="1" colspan="1">產品類別</th>
+                    <th rowspan="1" colspan="1">管理庫存</th>
                     <th rowspan="1" colspan="1">更新</th>
 
                 </tr>
@@ -62,10 +63,11 @@
                   <th> <a class="btn btn-danger" href="{% url 'deleteProduct' productId=p.pk %}">刪除</a></th>
                   <th> {{ p.name }}</th>
                   <th> {{ p.category.name }}</th>
+                  <th> {{ p.category.name }}</th>
                   <th> <a class="btn btn-info" href="{% url 'updateProduct' productId=p.pk %}">更新</a></th>
                 </tr>
               {% empty %}
-                  <tr><td colspan="4">此商店無產品資料</td></tr>
+                  <tr><td colspan="5">此商店無產品資料</td></tr>
               {% endfor %}
 
 
