@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8c5096bb-f353-42d3-b8fb-eb74d1e2b31f" name="Default" comment="1. 新增庫存detail、更新&#10;2. 修正帳號啟用bug&#10;3. message頁面，button可以自定議顯示文字">
+    <list default="true" id="8c5096bb-f353-42d3-b8fb-eb74d1e2b31f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,7 +38,7 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/InventoryMaster/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
+            <state relative-caret-position="988">
               <caret line="52" column="63" selection-start-line="52" selection-start-column="63" selection-end-line="52" selection-end-column="63" />
               <folding>
                 <element signature="e#639#680#0" expanded="true" />
@@ -50,7 +50,7 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inventory/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
+            <state relative-caret-position="361">
               <caret line="19" column="41" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
@@ -62,7 +62,7 @@
       <file leaf-file-name="inventory_detail.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inventory/templates/inventory_detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
+            <state relative-caret-position="475">
               <caret line="25" selection-start-line="25" selection-end-line="30" selection-end-column="12" />
             </state>
           </provider>
@@ -71,8 +71,8 @@
       <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/layouts/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="235" column="44" lean-forward="true" selection-start-line="235" selection-start-column="44" selection-end-line="235" selection-end-column="44" />
+            <state relative-caret-position="4465">
+              <caret line="235" column="44" selection-start-line="235" selection-start-column="44" selection-end-line="235" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -80,20 +80,8 @@
       <file leaf-file-name="sb-admin-datatables.min.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/js/sb-admin-datatables.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
+            <state relative-caret-position="152">
               <caret line="8" column="22" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/inventory/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
-              <folding>
-                <element signature="e#0#28#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -101,7 +89,7 @@
       <file leaf-file-name="inventory_update_form.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inventory/templates/inventory_update_form.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
+            <state relative-caret-position="608">
               <caret line="32" column="38" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
             </state>
           </provider>
@@ -110,7 +98,7 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/product/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
+            <state relative-caret-position="608">
               <caret line="32" column="35" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
@@ -122,19 +110,24 @@
       <file leaf-file-name="product_update_form.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/product/templates/product_update_form.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="428">
+            <state relative-caret-position="779">
               <caret line="41" column="73" selection-start-line="41" selection-start-column="62" selection-end-line="41" selection-end-column="73" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="product_list.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="product_list.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/product/templates/product_list.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="242">
               <caret line="114" column="29" selection-start-line="114" selection-start-column="29" selection-end-line="114" selection-end-column="29" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="0003_auto_20180618_1616.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/inventory/migrations/0003_auto_20180618_1616.py">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -260,6 +253,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -355,7 +349,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -553,7 +546,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529413082979</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="1. 新增庫存detail、更新&#10;2. 修正帳號啟用bug&#10;3. message頁面，button可以自定議顯示文字">
+      <created>1529413779729</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1529413779729</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TodoView">
@@ -576,14 +576,13 @@
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49946752" weight="0.32905984" />
       <window_info anchor="bottom" id="Python Console" order="11" sideWeight="0.49840257" weight="0.32724506" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.7598509" weight="0.39269406" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49923897" visible="true" weight="0.41" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4977169" visible="true" weight="0.41666666" />
       <window_info anchor="right" id="R Packages" order="6" weight="0.32956383" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="R Graphics" order="3" />
       <window_info anchor="right" id="Database" order="4" weight="0.08637874" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4978701" weight="0.325723" />
       <window_info anchor="right" id="SciView" order="5" weight="0.32875606" />
-      <window_info id="Structure" order="1" sideWeight="0.50076103" side_tool="true" visible="true" weight="0.41" />
+      <window_info id="Structure" order="1" sideWeight="0.5022831" side_tool="true" visible="true" weight="0.41666666" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49946752" weight="0.3991462" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -593,6 +592,7 @@
       <window_info anchor="bottom" id="Inspection Results" order="12" sideWeight="0.49946752" weight="0.24653149" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4978701" weight="0.325723" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -602,7 +602,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="SHOW_UNVERSIONED_FILES_WHILE_COMMIT" value="false" />
     <MESSAGE value="新增register功能" />
     <MESSAGE value="1. 新增帳號啟用信&#10;2. 新增發信設定" />
     <MESSAGE value="1. 新增建立商店功能&#10;2. 創建store、product、inventory app及其models" />
@@ -622,13 +621,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="1. 新增庫存detail、更新&#10;2. 修正帳號啟用bug&#10;3. message頁面，button可以自定議顯示文字" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/user/templates/user_reset_password.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="19" column="54" selection-start-line="19" selection-start-column="54" selection-end-line="19" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/user/templates/user_forgot_password.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
@@ -907,7 +899,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/inventory/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
+        <state relative-caret-position="228">
           <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
@@ -917,7 +909,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/inventory/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
+        <state relative-caret-position="361">
           <caret line="19" column="41" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
@@ -927,35 +919,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/layouts/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="235" column="44" lean-forward="true" selection-start-line="235" selection-start-column="44" selection-end-line="235" selection-end-column="44" />
+        <state relative-caret-position="4465">
+          <caret line="235" column="44" selection-start-line="235" selection-start-column="44" selection-end-line="235" selection-end-column="44" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static/js/sb-admin-datatables.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
+        <state relative-caret-position="152">
           <caret line="8" column="22" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/inventory/templates/inventory_detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
+        <state relative-caret-position="475">
           <caret line="25" selection-start-line="25" selection-end-line="30" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/inventory/templates/inventory_update_form.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
+        <state relative-caret-position="608">
           <caret line="32" column="38" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/InventoryMaster/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
+        <state relative-caret-position="988">
           <caret line="52" column="63" selection-start-line="52" selection-start-column="63" selection-end-line="52" selection-end-column="63" />
           <folding>
             <element signature="e#639#680#0" expanded="true" />
@@ -965,7 +957,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/product/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
+        <state relative-caret-position="608">
           <caret line="32" column="35" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
           <folding>
             <element signature="e#0#44#0" expanded="true" />
@@ -975,7 +967,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/product/templates/product_update_form.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
+        <state relative-caret-position="779">
           <caret line="41" column="73" selection-start-line="41" selection-start-column="62" selection-end-line="41" selection-end-column="73" />
         </state>
       </provider>
@@ -986,6 +978,9 @@
           <caret line="114" column="29" selection-start-line="114" selection-start-column="29" selection-end-line="114" selection-end-column="29" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inventory/migrations/0003_auto_20180618_1616.py">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
   <component name="masterDetails">
