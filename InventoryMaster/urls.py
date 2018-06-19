@@ -14,11 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf.urls import include, url
-
+from django.views.generic import TemplateView
 from django.contrib import admin
 admin.autodiscover()
 
-from user.views import login, logout,  register, userResetPassword, userSetNewPassword, userActivate, forgotPassword, testMail, home, reSendUserActiveMail
+from user.views import *
 
 from store.views import createStore, joinStore, listStore, deleteStore, updateStore
 
@@ -40,7 +40,9 @@ urlpatterns = [
     url(r'^user/home/', home, name='home'),
     url(r'^user/testMail/', testMail),
     url(r'^user/setNewPassword/', userSetNewPassword, name='userSetNewPassword'),
-
+    url(r'^user/detail/', userDetail,name='userDetail'),
+    url(r'^user/updatePassword/', updatePassword, name='updatePassword'),
+    url(r'^user/update/', updateUser,name='updateUser'),
     url(r'^store/create/', createStore , name='createStore'),
     url(r'^store/join/', joinStore, name='joinStore'),
     url(r'^store/list/', listStore, name='listStore'),
@@ -60,6 +62,7 @@ urlpatterns = [
     url(r'^$', login),
 
     url(r'^inventory/detail/(?P<productId>\d+)/$', inventoryDetail, name='inventoryDetail'),
-    url(r'^inventory/update/(?P<inventory_id>\d+)/$', updateInventory, name='updateInventory')
+    url(r'^inventory/update/(?P<inventory_id>\d+)/$', updateInventory, name='updateInventory'),
 
+    url(r'^todo/',TemplateView.as_view(template_name='todo.html'), name='todo')
 ]

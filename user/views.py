@@ -188,6 +188,39 @@ def userSetNewPassword(request):
 def home(request):
     return render(request, 'user_home.html', {})
 
+def userDetail(request):
+    user = request.session.get('user')
+
+    if user is not None:
+        store_user_releations = Store_User_Relation.objects.filter(user=user)
+        return render(request,'user_detail.html',{'user':user,'store_user_releations':store_user_releations})
+    else:
+        return redirect('login')
+
+def updateUser(request):
+    user = request.session.get('user')
+    form = UpdateUserForm(request.POST)
+    if form.is_valid():
+        user.name = form.cleaned_data['name']
+        user.save()
+        request.session['user']=user
+        return redirect('userDetail')
+    else:
+        form = UpdateUserForm()
+
+    return render(request,'user_update.html',{'form':form})
+
+def updatePassword(request):
+    user = request.session.get('user')
+    form = UpdatePasswordForm(request.POST)
+    if user is not None and form.is_valid():
+        user.password = form.cleaned_data['new_password']
+        user.save()
+        return redirect('userDetail')
+    elif user is not None:
+        form = UpdatePasswordForm()
+
+    return render(request, 'user_password_update.html', {'form':form})
 
 def testMail(request):
     message = render_to_string('test_mail.html', {

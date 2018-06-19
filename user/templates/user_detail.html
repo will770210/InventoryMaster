@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %} 庫存大師 - 個人帳號 {% endblock %}
+{% block body %}
+
+<div class="card mb-3">
+
+      <div class="card-header">個人帳號</div>
+      <div class="card-body">
+          <p class="card-text">
+            名字: {{ user.name }}           </p>
+          <p class="card-text">
+            email: {{ user.email }}
+        </p>
+        <p class="card-text">
+
+        </p>
+        <a class="btn btn-primary" href="{% url 'updatePassword' %}">變更密碼</a>
+        <a class="btn btn-danger" href="{% url 'updateUser' %}">變更名字</a>
+
+      </div>
+
+
+
+    </div>
+    <div class="card mb-3">
+          <div class="card-header">商店列表</div>
+          <div class="card-body">
+          <div class="table-responsive">
+
+              <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+              <thead>
+                <tr>
+                    <th>是否有管理權限</th>
+                    <th>商店名稱</th>
+                    <th>商店電話</th>
+                    <th>商店地址</th>
+                    <th>商店代碼</th>
+                    <th>更新</th>
+                    <th>產品列表</th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+              {% for r in store_user_releations %}
+                  <tr>
+                    <th>{{ r.is_manager }}</th>
+                    <th>{{ r.store.name }}</th>
+                    <th>{{ r.store.phone }}</th>
+                    <th>{{ r.store.address }}</th>
+                    <th>{{ r.store.store_code }}</th>
+                    <th><a class="btn btn-success" href="{% url 'updateStore' storeId=r.store.id%}">更新</a></th>
+                    <th><a class="btn btn-info" href="{% url 'listProduct' storeId=r.store.id%}">產品列表</a></th>
+                  </tr>
+              {% empty %}
+                  <tr><th colspan="7">沒有商店資料</th></tr>
+              {% endfor %}
+
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+    </div>
+{% endblock %}
