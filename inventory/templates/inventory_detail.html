@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %} 庫存大師 - 產品列表 {% endblock %}
+{% block header %}
+{% endblock %}
+{% block body %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'listStore' %}">商店列表</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'listProduct' storeId=inventory.store.id %}">產品列表</a>
+        </li>
+          <li class="breadcrumb-item active">
+          庫存維護
+        </li>
+    </ol>
+
+    <div class="card">
+      <h5 class="card-header">庫存資訊</h5>
+      <div class="card-body">
+        <h5 class="card-title">店名: {{ product.store.name }}</h5>
+        <p class="card-text">
+            產品類別: {{ product.category.name }}
+        </p>
+        <p class="card-text">
+            產品名稱: {{ product.name }}
+        </p>
+        <p class="card-text">
+            目前庫存: {{ inventory.amount }} <a class="btn btn-danger" href="{% url 'updateInventory' inventory_id=inventory.id %}">更新</a>
+        </p>
+
+      </div>
+    </div>
+    <br>
+    <br>
+
+    <div class="card">
+        <h5 class="card-header">
+          庫存變更紀錄
+
+        </h5>
+
+        <div class="card-body">
+          <div class="table-responsive">
+
+              <table class="table table-bordered dataTable" id="inventoryTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+              <thead>
+                <tr>
+                    <th rowspan="1" colspan="1">變更日期</th>
+                    <th rowspan="1" colspan="1">變更者</th>
+                    <th rowspan="1" colspan="1">進貨/扣掉</th>
+                    <th rowspan="1" colspan="1">變更前數量</th>
+                    <th rowspan="1" colspan="1">變更後數量</th>
+
+                </tr>
+              </thead>
+              <tbody>
+
+              {% for h in inventory_histories %}
+                <tr>
+                  <th> {{ h.created_at }}</th>
+                  <th> {{ h.created_by.name }}</th>
+                  <th> {{ h.action_type }}</th>
+                  <th> {{ h.previous_amount }}</th>
+                  <th> {{ h.current_amount }}</th>
+                </tr>
+              {% empty %}
+                  <tr><td colspan="5">此產品無庫存變更紀錄</td></tr>
+              {% endfor %}
+
+
+
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+    </div>
+    <br><br>
+{#    <a class="btn btn-info" href="{% url 'listStore' %}">回商店列表</a>#}
+{% endblock %}

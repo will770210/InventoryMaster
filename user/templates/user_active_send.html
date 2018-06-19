@@ -7,18 +7,19 @@
       <div class="card-body">
           我們已寄送帳號啟連結至您的個人信箱中<br>
 
-          請您至個人信箱中收信，以完成帳號啟用。<br>
+          請您至個人信箱中收信，以完成帳號啟用。<br><br>
 
           若未收到啟用信件，請輸您的註冊email，重新發送驗證信.<br>
-          <form method="post" action="{% url 're' storeId=store.id %}">
+          <form method="post" action="{% url 'reSendUserActiveMail' %}">
+              {% csrf_token %}
               <div class="form-group">
                   <div class="form-row">
                       <div class="col-md-12">
                           <input type="hidden" name="id" value="{{ id }}" >
-                          <input type="text" class="form-control" placeholder="請輸入您註冊的Email" name="email">
+                          <input type="email" class="form-control" placeholder="請輸入您註冊的Email" name="email">
                       </div>
                   </div>
-                  <button class="form-control" type="submit" value="重發驗證信"></button>
+                  <button class="btn btn-primary btn-block" type="submit" value="重發驗證信">重發驗證信</button>
               </div>
           </form>
       </div>

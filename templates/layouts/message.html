@@ -5,9 +5,9 @@
     <div class="card card-login mx-auto mt-5">
       <div class="card-header">{{ title }}</div>
       <div class="card-body">
-          {{ content }}
+          <p>{{ content }}</p>
 
-          <a type="button" class="btn btn-primary btn-block" href="{% url 'login' %}">重新登入</a>
+          <a type="button" class="btn btn-primary btn-block" href="{% url 'login' %}">{{ buttonValue }}</a>
       </div>
     </div>
 {% endblock %}

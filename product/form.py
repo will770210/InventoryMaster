@@ -6,9 +6,6 @@ from inventory.models import *
 
 
 class CreateProductForm(forms.Form):
-
-
-
     name = forms.CharField(
         label='產品名稱',
         max_length=255,

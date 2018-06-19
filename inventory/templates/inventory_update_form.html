@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
-{% block title %} 庫存大師 - 編輯產品 {% endblock %}
+{% block title %} 庫存大師 - 更新庫存 {% endblock %}
 
 {% block body %}
-    <ol class="breadcrumb">
+      <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a href="">Dashboard</a>
         </li>
@@ -11,16 +11,28 @@
           <a href="{% url 'listStore' %}">商店列表</a>
         </li>
           <li class="breadcrumb-item">
-          <a href="{% url 'listProduct' storeId=product.store.id %}">產品列表</a>
+          <a href="{% url 'listProduct' storeId=inventory.store.id %}">產品列表</a>
         </li>
-        <li class="breadcrumb-item active">編輯產品</li>
-    </ol>
-    
+        <li class="breadcrumb-item active">更新庫存</li>
+      </ol>
+
 <div class="card card-register mx-auto mt-5">
 
-      <div class="card-header">編輯的產品</div>
+      <div class="card-header">更新庫存</div>
       <div class="card-body">
-        <form method="post" action="{% url 'updateProduct' productId=product.id %}">
+        <p class="card-text">
+            商店名稱: {{ inventory.store.name }}
+        </p>
+        <p class="card-text">
+            產品類別: {{ inventory.product.category.name }}
+        </p>
+        <p class="card-text">
+            產品名稱: {{ inventory.product.name }}
+        </p>
+        <p class="card-text">
+            目前庫存: {{ inventory.amount }}
+        </p>
+        <form method="post" action="{% url 'updateInventory' inventory_id=inventory.id %}">
 
         {% csrf_token %}
         {% for hidden_field in form.hidden_fields %}
@@ -39,7 +51,7 @@
                 </div>
             </div>
         {% endfor %}
-            <a class="btn btn-danger btn-block" href="{% url 'listProduct' storeId=product.store.id %}">取消</a>
+            <a class="btn btn-danger btn-block" class="btn btn-danger btn-block" href="{% url 'inventoryDetail' productId=inventory.product.id %}">取消</a>
             <button type="submit" class="btn btn-primary btn-block">確定</button>
         </form>
 

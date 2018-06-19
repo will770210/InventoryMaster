@@ -165,7 +165,7 @@ def createProductCategory(request, storeId):
             parent_category = form.cleaned_data['parent_category']
             level_of_product = 0
             if parent_category is not None:
-                level_of_product = parent_category.parent_category + 1
+                level_of_product = parent_category.level_of_product + 1
 
             category = Product_Category.objects.create(
                 store=store,

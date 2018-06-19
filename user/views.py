@@ -11,6 +11,9 @@ from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from django.template import RequestContext
 from user.tokens import *
+from user.functions import sendUserActiveMail
+from django.utils import timezone
+
 
 # import logging
 # Create your views here.
@@ -33,8 +36,11 @@ def login(request):
         user = User.objects.filter(email=email, password=password).first()
 
     if user is not None and user.is_active == False:
-        return render(request, 'user_active_send.html', {})
+        return render(request, 'user_active_send.html', {'id':user.id})
     elif user is not None:
+        user.last_login = timezone.now()
+        user.save()
+
         request.session['user'] = user
         storeCount = Store_User_Relation.objects.filter(user=user, is_manager=True).values_list("store").count()
 
@@ -58,28 +64,12 @@ def register(request):
                 password=form.cleaned_data['password'],
                 is_active=False)
 
-            sendUserActiveMail(request,user)
+            sendUserActiveMail(request, user)
 
-            return render(request, 'user_active_send.html', {'id':user.id})
+            return render(request, 'user_active_send.html', {'id': user.id})
     else:
         form = RegisterForm()
     return render(request, 'user_register.html', {'form': form})
-
-def sendUserActiveMail(request,user):
-    # send user activate mail
-    current_site = get_current_site(request)
-    message = render_to_string('user_active_mail.html', {
-        'user': user,
-        'domain': current_site.domain,
-        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-        'token': account_activation_token.make_token(user),
-    })
-    # Sending activation link in terminal
-    # user.email_user(subject, message)
-    mail_subject = '[庫存大師] 啟用帳號'
-    to_email = user.email
-    email = EmailMessage(mail_subject, message, to=[to_email])
-    email.send()
 
 def reSendUserActiveMail(request):
     if request.method == 'POST':
@@ -90,7 +80,8 @@ def reSendUserActiveMail(request):
             if user.is_active==True:
                 title = '帳號啟用'
                 content = '您的帳號已經啟用成功，請重進行登入'
-                return render(request, 'message.html', {title: title, content: content})
+                buttonValue = '登入'
+                return render(request, 'message.html', {'title': title, 'content': content,'buttonValue':buttonValue})
 
             elif user.is_active==False:
                 sendUserActiveMail(request,user)
@@ -98,7 +89,8 @@ def reSendUserActiveMail(request):
 
     title = '帳號啟用'
     content = '帳號啟用異常，請您重試一次或系統管理員聯絡'
-    return render(request, 'message.html', {title: title, content: content})
+    buttonValue = '登入'
+    return render(request, 'message.html', {'title': title, 'content': content,'buttonValue':buttonValue})
 
 
 def forgotPassword(request):
@@ -122,7 +114,7 @@ def forgotPassword(request):
 
             email = EmailMessage(mail_subject, message, to=[to_email])
             email.send()
-            return render(request, 'message.html',{'title':'重置密碼','content':'已傳送重置密碼連結，至您的註冊Email，請至您的個人Email進行重密碼'})
+            return render(request, 'message.html',{'title':'重置密碼', 'content':'已傳送重置密碼連結，至您的註冊Email，請至您的個人Email進行重密碼', 'buttonValue':'登入'})
 
     return render(request, 'user_forgot_password.html', {})
 
@@ -133,15 +125,26 @@ def userActivate(request, uidb64, token):
         user = User.objects.get(pk=uid)
     except(TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
-    if user is not None and account_activation_token.check_token(user, token):
+
+    if user is not None and user.is_active == False and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        login(request, user)
+
+        title = '帳號啟用成功'
+        content = '帳號啟用成功，請重新登入!'
+        buttonValue = '登入'
+
+    elif user is not None and user.is_active == True:
+        title = '帳號已啟用'
+        content = '帳號已啟用成功，請重新登入!'
+        buttonValue = '登入'
 
     else:
-        title = '帳號驗證失敗'
+        title = '帳號啟用失敗'
         content = '啟用帳號的連結有誤!'
-        return render(request, 'message.html', {'title': title, 'content': content})
+        buttonValue = '重新登入'
+
+    return render(request, 'message.html', {'title': title, 'content': content, 'buttonValue':buttonValue})
 
 
 def userResetPassword(request, uidb64, token):
@@ -156,7 +159,8 @@ def userResetPassword(request, uidb64, token):
     else:
         title = '重置密碼失敗'
         content = '重置密碼連結有誤!'
-        return render(request, 'message.html', {'title': title, 'content': content})
+        buttonValue = '登入'
+        return render(request, 'message.html', {'title': title, 'content': content, 'buttonValue':buttonValue})
 
 
 def userSetNewPassword(request):
@@ -177,7 +181,8 @@ def userSetNewPassword(request):
 
     title = '重置密碼失敗'
     content = '重置密碼失敗'
-    return render(request, 'message.html', {'title': title, 'content': content})
+    buttonValue = '登入'
+    return render(request, 'message.html', {'title': title, 'content': content, 'buttonValue':buttonValue})
 
 
 def home(request):

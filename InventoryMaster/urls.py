@@ -24,6 +24,7 @@ from store.views import createStore, joinStore, listStore, deleteStore, updateSt
 
 from product.views import createProduct,createProductFirst, updateProduct, listProduct, deleteProduct, createProductCategory, updateProductCategory, listProductCategory, deleteProductCategory
 
+from inventory.views import *
 
 urlpatterns = [
     url(r'^/',login),
@@ -35,7 +36,7 @@ urlpatterns = [
     url(r'^user/forgotPassword/', forgotPassword, name='forgotPassword'),
     url(r'^user/userActivate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', userActivate, name='userActivate'),
     url(r'^user/resetPassword/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', userResetPassword, name='userResetPassword'),
-    url(r'^user/reSendActiveMail/',reSendUserActiveMail,'reSendUserActiveMail'),
+    url(r'^user/reSendActiveMail/', reSendUserActiveMail, name='reSendUserActiveMail'),
     url(r'^user/home/', home, name='home'),
     url(r'^user/testMail/', testMail),
     url(r'^user/setNewPassword/', userSetNewPassword, name='userSetNewPassword'),
@@ -58,5 +59,7 @@ urlpatterns = [
     url(r'^category/delete/(?P<categoryId>\d+)/$', deleteProductCategory, name='deleteProductCategory'),
     url(r'^$', login),
 
+    url(r'^inventory/detail/(?P<productId>\d+)/$', inventoryDetail, name='inventoryDetail'),
+    url(r'^inventory/update/(?P<inventory_id>\d+)/$', updateInventory, name='updateInventory')
 
 ]
