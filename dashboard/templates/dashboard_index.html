@@ -10,10 +10,11 @@
         </li>
     </ol>
 
+    <h4>低於安全庫存列表</h4>
 
     {% for store_inventory in less_safety_inventories %}
     <div class="card">
-        <h5 class="card-header">低於安全庫存: {{ store_inventory.store.name}}
+        <h5 class="card-header">{{ store_inventory.store.name}}<a class="btn btn-success" href="{% url 'listProduct' storeId=store_inventory.store.id %}">管理商店</a>
 
         </h5>
 
@@ -45,8 +46,7 @@
             </table>
           </div>
         </div>
-    </div>
+    </div><br><br>
     {% endfor %}
-    <br><br>
 {#    <a class="btn btn-info" href="{% url 'listStore' %}">回商店列表</a>#}
 {% endblock %}

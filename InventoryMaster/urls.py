@@ -61,7 +61,7 @@ urlpatterns = [
     url(r'^category/update/(?P<categoryId>\d+)/$', updateProductCategory, name='updateProductCategory'),
     url(r'^category/list/(?P<storeId>\d+)/$', listProductCategory, name='listProductCategory'),
     url(r'^category/delete/(?P<categoryId>\d+)/$', deleteProductCategory, name='deleteProductCategory'),
-    url(r'^$', login),
+    url(r'^$', dashboard_index),
 
     url(r'^inventory/detail/(?P<productId>\d+)/$', inventoryDetail, name='inventoryDetail'),
     url(r'^inventory/update/(?P<inventory_id>\d+)/$', updateInventory, name='updateInventory'),

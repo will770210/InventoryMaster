@@ -8,9 +8,9 @@ from inventory.models import *
 scheduler = BackgroundScheduler()
 scheduler.add_jobstore(DjangoJobStore(), "default")
 
-# @register_job(scheduler, "interval", seconds=300, replace_existing=True)
-# def test_job():
-#     print("I'm a test job!")
+@register_job(scheduler, "interval", seconds=300, replace_existing=True)
+def test_job():
+    print("I'm a test job!")
 
 
 @register_job(scheduler, "cron", year='*', month='*', day='*', hour='1', minute='0')

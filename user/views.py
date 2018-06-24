@@ -48,7 +48,7 @@ def login(request):
         if storeCount == 0:
             return render(request, 'user_home.html', {})
         else:
-            return redirect('listStore')
+            return redirect('dashboardIndex')
 
     return render(request, 'user_login.html')
 
