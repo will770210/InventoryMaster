@@ -8,12 +8,14 @@ from inventory.models import *
 scheduler = BackgroundScheduler()
 scheduler.add_jobstore(DjangoJobStore(), "default")
 
-@register_job(scheduler, "interval", seconds=300, replace_existing=True)
-def test_job():
-    print("I'm a test job!")
+# @register_job(scheduler, "interval", seconds=300, replace_existing=True)
+# def test_job():
+#     print("I'm a test job!")
 
-@register_job(scheduler, "interval", seconds=10)
+
+@register_job(scheduler, "cron", year='*', month='*', day='*', hour='1', minute='0')
 def check_safe_inventory():
+    print("Execute check_safe_inventory job!")
     stores = Store.objects.filter(enable=True)
 
     now_date = datetime.now().date()
@@ -35,7 +37,7 @@ def check_safe_inventory():
                                                          action_type='OUT')
             inventory_sum_qty = 0
             for history in histories:
-                inventory_sum_qty = history.previous_amount - history.current_amount
+                inventory_sum_qty = inventory_sum_qty + (history.previous_amount - history.current_amount)
 
             inventory_avg_qty = (inventory_sum_qty/check_safe_inventory_days)
 

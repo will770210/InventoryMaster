@@ -16,8 +16,9 @@ def sendUserActiveMail(request, user):
         'token': account_activation_token.make_token(user),
     })
     # Sending activation link in terminal
-    # user.email_user(subject, message)
+
     mail_subject = '[庫存大師] 啟用帳號'
     to_email = user.email
     email = EmailMessage(mail_subject, message, to=[to_email])
+    email.content_subtype = 'html'
     email.send()

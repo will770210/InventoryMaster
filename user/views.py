@@ -7,9 +7,9 @@ from django.http import HttpResponse
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.sites.shortcuts import get_current_site
-from django.template.loader import render_to_string
+from django.template.loader import render_to_string, get_template
 from django.core.mail import EmailMessage
-from django.template import RequestContext
+from django.template import RequestContext, Context
 from user.tokens import *
 from user.functions import sendUserActiveMail
 from django.utils import timezone
@@ -107,15 +107,21 @@ def forgotPassword(request):
             # Sending activation link in terminal
             mail_subject = '[庫存大師] 密碼重置'
             to_email = user.email
+
             message = render_to_string('user_reset_password_mail.html', {
-                'user': user, 'domain': current_site.domain,
+                'user': user,
+                'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': account_reset_password_token.make_token(user),
             })
 
             email = EmailMessage(mail_subject, message, to=[to_email])
+            email.content_subtype = 'html'
             email.send()
-            return render(request, 'message.html',{'title':'重置密碼', 'content':'已傳送重置密碼連結，至您的註冊Email，請至您的個人Email進行重密碼', 'buttonValue':'登入'})
+            return render(request, 'message.html', {
+                'title': '重置密碼',
+                'content': '已傳送重置密碼連結，至您的註冊Email，請您至個人Email進行重置密碼',
+                'buttonValue':'登入'})
 
     return render(request, 'user_forgot_password.html', {})
 
