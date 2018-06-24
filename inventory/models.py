@@ -8,6 +8,8 @@ class Inventory(models.Model):
     store = models.ForeignKey(Store)
     product = models.ForeignKey(Product)
     amount = models.IntegerField(default=0)
+    is_less_safety_inventory = models.BooleanField(default=False)
+    safety_inventory_amount = models.IntegerField(default=0)
 
 
 class Inventory_History(models.Model):

@@ -5,7 +5,9 @@ from store.models import *
 from product.form import *
 import uuid
 from django.views.generic import UpdateView
+from user.decorators import *
 
+@check_login
 def listStore(request):
     user = request.session.get('user')
     relations = Store_User_Relation.objects.filter(user=user, is_manager=True, store__enable=True)
@@ -16,6 +18,7 @@ def listStore(request):
     return render(request, 'store_list.html', {'stores': stores})
 
 
+@check_login
 def deleteStore(request, storeId):
     user = request.session.get('user')
     store = Store.objects.filter(pk=storeId).first()
@@ -26,6 +29,7 @@ def deleteStore(request, storeId):
     return redirect('listStore')
 
 
+@check_login
 def updateStore(request, storeId):
     store = get_object_or_404(Store, pk=storeId)
     form = StoreForm(request.POST or None, instance=store)
@@ -35,7 +39,7 @@ def updateStore(request, storeId):
     return render(request, 'store_update_from.html', {'form': form})
 
 
-
+@check_login
 def createStore(request):
     if request.method == 'POST':
         form = StoreForm(request.POST or None)

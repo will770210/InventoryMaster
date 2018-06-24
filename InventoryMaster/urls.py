@@ -26,6 +26,8 @@ from product.views import createProduct,createProductFirst, updateProduct, listP
 
 from inventory.views import *
 
+from dashboard.views import *
+
 urlpatterns = [
     url(r'^/',login),
     url(r'^admin/', include(admin.site.urls)),
@@ -64,5 +66,12 @@ urlpatterns = [
     url(r'^inventory/detail/(?P<productId>\d+)/$', inventoryDetail, name='inventoryDetail'),
     url(r'^inventory/update/(?P<inventory_id>\d+)/$', updateInventory, name='updateInventory'),
 
-    url(r'^todo/',TemplateView.as_view(template_name='todo.html'), name='todo')
+    url(r'^todo/',TemplateView.as_view(template_name='todo.html'), name='todo'),
+
+    url(r'^dashboard',dashboard_index, name='dashboardIndex')
 ]
+
+#run APScheduler
+import InventoryMaster.jobs
+import logging
+# logging.basicConfig(level="DEBUG")

@@ -13,6 +13,7 @@ from django.template import RequestContext
 from user.tokens import *
 from user.functions import sendUserActiveMail
 from django.utils import timezone
+from user.decorators import *
 
 
 # import logging
@@ -188,6 +189,8 @@ def userSetNewPassword(request):
 def home(request):
     return render(request, 'user_home.html', {})
 
+
+@check_login
 def userDetail(request):
     user = request.session.get('user')
 
@@ -197,6 +200,7 @@ def userDetail(request):
     else:
         return redirect('login')
 
+@check_login
 def updateUser(request):
     user = request.session.get('user')
     form = UpdateUserForm(request.POST)
@@ -210,6 +214,7 @@ def updateUser(request):
 
     return render(request,'user_update.html',{'form':form})
 
+@check_login
 def updatePassword(request):
     user = request.session.get('user')
     form = UpdatePasswordForm(request.POST)

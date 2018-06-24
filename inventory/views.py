@@ -49,6 +49,10 @@ def updateInventory(request, inventory_id):
         inventory_History.save()
 
         inventory.amount = current_amount
+
+        if action_type == 'IN' and current_amount >= inventory.safety_inventory_amount: # 進貨若總庫存大於安全庫存，則將低於安全庫存的flag改為False
+            inventory.is_less_safety_inventory = False
+
         inventory.save()
 
         return redirect('inventoryDetail', productId=inventory.product.id)

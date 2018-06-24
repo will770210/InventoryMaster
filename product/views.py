@@ -4,8 +4,10 @@ from product.models import *
 from store.models import *
 from inventory.models import *
 # Create your views here.
+from user.decorators import *
 
 
+@check_login
 def updateProduct(request, productId):
     product = Product.objects.filter(pk=productId).first()
 
@@ -33,6 +35,7 @@ def updateProduct(request, productId):
     return render(request, 'product_update_form.html', {'form': form, 'product': product})
 
 
+@check_login
 def deleteProduct(request, productId):
     user = request.session.get('user')
 
@@ -48,6 +51,7 @@ def deleteProduct(request, productId):
     return redirect('listProduct', storeId=storeId)
 
 
+@check_login
 def listProduct(request, storeId):
     user = request.session.get('user')
     if storeId is not None:
@@ -61,6 +65,7 @@ def listProduct(request, storeId):
             return redirect('listStore')
 
 
+@check_login
 def createProductFirst(request, storeId):
     store = Store.objects.filter(pk=storeId).first()
 
@@ -114,6 +119,7 @@ def createProductFirst(request, storeId):
     return render(request, 'product_create_form.html', {'form': form, 'store':store})
 
 
+@check_login
 def createProduct(request, storeId):
     store = Store.objects.filter(pk=storeId).first()
 
@@ -155,6 +161,7 @@ def createProduct(request, storeId):
     return render(request, 'product_create_form.html', {'form': form, 'store':store})
 
 
+@check_login
 def createProductCategory(request, storeId):
     store = Store.objects.filter(id=storeId).first()
     form = ProductCategoryForm(request.POST or None, storeId=store.id)
@@ -179,6 +186,8 @@ def createProductCategory(request, storeId):
 
     return render(request, 'category_create_form.html', {'form':form , 'store':store})
 
+
+@check_login
 def updateProductCategory(request,categoryId):
 
     category = Product_Category.objects.filter(id=categoryId).first()
@@ -202,10 +211,12 @@ def updateProductCategory(request,categoryId):
     return render(request, 'category_update_form.html', {'form': form, 'store': category.store})
 
 
+@check_login
 def listProductCategory(request,storeId):
     pass
 
 
+@check_login
 def deleteProductCategory(request,categoryId):
     user = request.session.get('user')
 

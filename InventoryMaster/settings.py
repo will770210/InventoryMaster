@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'product',
     'inventory',
     'widget_tweaks',
+    'django_apscheduler',
+    'dashboard',
 ]
 
 MIDDLEWARE = [
