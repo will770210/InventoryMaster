@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %} 庫存大師 - 邀請員工{% endblock %}
+{% block body %}
+    <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'dashboardIndex' %}">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item">
+          邀請員工
+        </li>
+      </ol>
+
+
+
+
+    <div class="card mb-3">
+          <div class="card-header">邀請員工</div>
+          <div class="card-body">
+          <div class="table-responsive">
+              <form method="post" action="{% url 'user_employee_invitation' %}">
+                {% csrf_token %}
+                請選擇商店: <select name="store_id" id="store_id" class="form-control">
+                {% for relation in manager_relations %}
+                    <option value="{{ relation.store.id }}" {% if relation.store.id == store.id %} selected {% endif %}>{{ relation.store.name }}</option>
+                {% endfor %}
+                </select><br>
+
+                請輸入員工Email:
+                <input type="email" name="email" value="" class="form-control" placeholder="請輸入員工Email"><br>
+
+                <button type="submit" class="btn btn-primary">確定</button>
+              </form>
+          </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+    <script>
+        $(document).ready(function() {
+            $("#store_id").change(function () {
+                window.location.href='{% url 'user_employee_list'%}/'+$('select[name=store_id]').val()+"/"
+            });
+        });
+    </script>
+{% endblock %}
+

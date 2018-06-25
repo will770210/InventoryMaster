@@ -233,6 +233,54 @@ def updatePassword(request):
 
     return render(request, 'user_password_update.html', {'form':form})
 
+@check_login
+def user_employee_list(request,store_id=None):
+    user = request.session.get('user')
+
+    manager_relations = Store_User_Relation.objects.filter(user=user, is_manager=True, store__enable=True)  # manager relations
+
+    store = None
+    print(store_id)
+    if store_id is None:
+        relation = manager_relations.first()
+        store = relation.store
+    else:
+        store = Store.objects.filter(id=store_id).first()
+
+    employee_relations = Store_User_Relation.objects.filter(store=store, is_manager=False)  # manager relations
+
+    users = list([employee_relations.user for relation in employee_relations])
+
+    return render(request,'user_employee_list.html',{'manager_relations':manager_relations, 'store':store, 'users':users})
+
+
+def user_employee_invitation(request):
+    user = request.session.get('user')
+
+    manager_relations = Store_User_Relation.objects.filter(user=user, is_manager=True, store__enable=True)  # manager relations
+
+    if request.POST.get('store_id') is not None and request.POST.get('email') is not None:
+        store = Store.objects.filter(id=request.POST.get('store_id')).first()
+        # Sending activation link in terminal
+        mail_subject = '[庫存大師] 加入商店'
+        to_email = request.POST.get('email')
+
+        message = render_to_string('user_employee_invitation_mail.html', {
+            'user': user,
+            'store': store,
+        })
+
+        email = EmailMessage(mail_subject, message, to=[to_email])
+        email.content_subtype = 'html'
+        email.send()
+
+        return redirect('user_employee_list', store_id=store.id)
+
+
+
+    return render(request,'user_employee_invitation.html',{'manager_relations':manager_relations})
+
+
 def testMail(request):
     message = render_to_string('test_mail.html', {
 

@@ -2,6 +2,17 @@
 
 {% block title %} 庫存大師 - 變更帳號資訊 {% endblock %}
 {% block body %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'dashboardIndex' %}">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'userDetail' %}">帳號管理</a>
+        </li>
+        <li class="breadcrumb-item">
+          變更帳號資訊
+        </li>
+      </ol>
 
 <div class="card mt-5">
 

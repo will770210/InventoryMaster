@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %} 庫存大師 - 員工列表{% endblock %}
+{% block body %}
+    <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'dashboardIndex' %}">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item">
+          員工列表
+        </li>
+      </ol>
+
+
+    請選擇商店: <select name="store_id" id="store_id" class="form-control">
+        {% for relation in manager_relations %}
+            <option value="{{ relation.store.id }}" {% if relation.store.id == store.id %} selected {% endif %}>{{ relation.store.name }}</option>
+        {% endfor %}
+    </select><br>
+
+    <div class="card mb-3">
+          <div class="card-header">員工列表 - {{ store.name }}</div>
+          <div class="card-body">
+          <div class="table-responsive">
+
+              <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+              <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>Email</th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+              {% for user  in users %}
+                  <tr>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email}}</td>
+                  </tr>
+              {% empty %}
+                  <tr><td colspan="2">尚未有員工</td></tr>
+              {% endfor %}
+
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+    <script>
+        $(document).ready(function() {
+            $("#store_id").change(function () {
+                window.location.href='{% url 'user_employee_list'%}/'+$('select[name=store_id]').val()+"/"
+            });
+        });
+    </script>
+{% endblock %}
+

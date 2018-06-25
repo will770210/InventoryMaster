@@ -45,6 +45,11 @@ urlpatterns = [
     url(r'^user/detail/', userDetail,name='userDetail'),
     url(r'^user/updatePassword/', updatePassword, name='updatePassword'),
     url(r'^user/update/', updateUser,name='updateUser'),
+    url(r'^user/employee/invitation',user_employee_invitation,name='user_employee_invitation'),
+
+    url(r'^user/employee/list/(?P<store_id>\d+)/$',user_employee_list,name='user_employee_list'),
+    url(r'^user/employee/list', user_employee_list,name='user_employee_list'),
+
     url(r'^store/create/', createStore , name='createStore'),
     url(r'^store/join/', joinStore, name='joinStore'),
     url(r'^store/list/', listStore, name='listStore'),
