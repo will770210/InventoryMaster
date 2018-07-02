@@ -40,7 +40,7 @@
               <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
               <thead>
                 <tr>
-                    <th>是否有管理權限</th>
+                    <th>是否為老闆</th>
                     <th>商店名稱</th>
                     <th>商店電話</th>
                     <th>商店地址</th>
@@ -54,7 +54,13 @@
 
               {% for r in store_user_releations %}
                   <tr>
-                    <th>{{ r.is_manager }}</th>
+                    <th>
+                        {% if r.is_manager %}
+                            是
+                        {% else %}
+                            否
+                        {% endif %}
+                    </th>
                     <th>{{ r.store.name }}</th>
                     <th>{{ r.store.phone }}</th>
                     <th>{{ r.store.address }}</th>

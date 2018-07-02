@@ -38,14 +38,14 @@
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
           <a class="nav-link" href="{% url 'userDetail' %}">
-            <i class="fa fa-fw fa-area-chart"></i>
+            <i class="fa fa-fw fa-user"></i>
             <span class="nav-link-text">帳號管理</span>
           </a>
         </li>
 
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents1" data-parent="#exampleAccordion1">
-            <i class="fa fa-fw fa-wrench"></i>
+            <i class="fa fa-fw fa-building"></i>
             <span class="nav-link-text">商店管理</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents1">
@@ -55,11 +55,14 @@
             <li>
               <a href="{% url 'createStore' %}">新增商店</a>
             </li>
+            <li>
+              <a href="{% url 'joinStore' %}">加入商店</a>
+            </li>
           </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
+            <i class="fa fa-fw  fa-users"></i>
             <span class="nav-link-text">員工管理</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">

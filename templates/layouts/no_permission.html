@@ -1,0 +1,13 @@
+{% extends 'dark.html' %}
+
+{% block title %} 庫存大師 - 權限不足 {% endblock %}
+{% block body %}
+    <div class="card card-login mx-auto mt-5">
+      <div class="card-header">無操作權限</div>
+      <div class="card-body">
+          <p>此功能您無操作權限!!</p>
+
+          <a class="btn btn-primary btn-block" href="javascript:history.back();">回上一步</a>
+      </div>
+    </div>
+{% endblock %}

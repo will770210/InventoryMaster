@@ -17,14 +17,14 @@ def updateProduct(request, productId):
         if form.is_valid():
 
             product.name = form.cleaned_data['name']
+            product.unit = form.cleaned_data['unit']
+            product.description = form.cleaned_data['description']
             product.category = form.cleaned_data['category']
             product.save()
 
             inventory = Inventory.objects.filter(product=product).filter()
 
-
             Safety_Inventory_Rule.objects.filter(inventory=inventory).update(safety_days=form.cleaned_data['safetyDays'])
-
 
             return redirect('listProduct', storeId=product.store.id)
 
@@ -56,10 +56,11 @@ def listProduct(request, storeId):
     user = request.session.get('user')
     if storeId is not None:
         store = Store.objects.filter(pk=storeId).first()
-        relations = Store_User_Relation.objects.filter(store=store, user=user, is_manager=True)
+        relations = Store_User_Relation.objects.filter(store=store, user=user)
         if relations.count():
             products = Product.objects.filter(store=store, enable=True)
-            categories = Product_Category.objects.filter(store=store,enable=True)
+            # inventories = Inventory.filter(product__in=product)
+            categories = Product_Category.objects.filter(store=store, enable=True)
             return render(request, 'product_list.html', {'store': store, 'products': products, 'categories':categories})
         else:
             return redirect('listStore')
@@ -88,6 +89,8 @@ def createProductFirst(request, storeId):
 
             product = Product.objects.create(
                 name=form.cleaned_data['name'],
+                unit=form.cleaned_data['unit'],
+                description=form.cleaned_data['description'],
                 category=category,
                 store=store,
                 status=0,
@@ -131,6 +134,8 @@ def createProduct(request, storeId):
             product = Product.objects.create(
                 name=form.cleaned_data['name'],
                 category=form.cleaned_data['category'],
+                unit=form.cleaned_data['unit'],
+                description=form.cleaned_data['description'],
                 store=store,
                 status=0,
                 enable=True

@@ -14,7 +14,7 @@
 
     {% for store_inventory in less_safety_inventories %}
     <div class="card">
-        <h5 class="card-header">{{ store_inventory.store.name}}<a class="btn btn-success" href="{% url 'listProduct' storeId=store_inventory.store.id %}">管理商店</a>
+        <h5 class="card-header">{{ store_inventory.store.name}}  <a class="btn btn-danger" href="{% url 'listProduct' storeId=store_inventory.store.id %}">管理商店</a>
 
         </h5>
 
@@ -35,9 +35,9 @@
               {% for i in store_inventory.inventories %}
                 <tr>
                   <th> {{ i.product.name }}</th>
+                  <th> {{ i.safety_inventory_amount }}</th>
                   <th> {{ i.amount }}</th>
-                  <th> {{ h.safety_inventory_amount }}</th>
-                  <th> <a href="{% url 'inventoryDetail' productId=i.product.id %}" class="btn btn-danger">管理庫存</a></th>
+                  <th> <a href="{% url 'inventoryDetail' productId=i.product.id %}" class="btn btn-success">管理庫存</a></th>
                 </tr>
               {% empty %}
                   <tr><td colspan="5">此商店庫存皆正常</td></tr>

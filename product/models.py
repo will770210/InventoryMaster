@@ -19,5 +19,7 @@ class Product(models.Model):
     status = models.IntegerField(default=0)
     category = models.ForeignKey(Product_Category)
     enable = models.BooleanField(default=True)
+    unit = models.CharField(max_length=50, default="個")
+    description = models.CharField(max_length=1024, null=True)
 
 

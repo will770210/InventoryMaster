@@ -20,7 +20,7 @@ admin.autodiscover()
 
 from user.views import *
 
-from store.views import createStore, joinStore, listStore, deleteStore, updateStore
+from store.views import createStore, join_store, listStore, deleteStore, updateStore
 
 from product.views import createProduct,createProductFirst, updateProduct, listProduct, deleteProduct, createProductCategory, updateProductCategory, listProductCategory, deleteProductCategory
 
@@ -51,7 +51,7 @@ urlpatterns = [
     url(r'^user/employee/list', user_employee_list,name='user_employee_list'),
 
     url(r'^store/create/', createStore , name='createStore'),
-    url(r'^store/join/', joinStore, name='joinStore'),
+    url(r'^store/join/', join_store, name='joinStore'),
     url(r'^store/list/', listStore, name='listStore'),
     url(r'^store/delete/(?P<storeId>\d+)/$', deleteStore, name='deleteStore'),
     url(r'^store/update/(?P<storeId>\d+)/$', updateStore, name='updateStore'),

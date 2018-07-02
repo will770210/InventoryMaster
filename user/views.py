@@ -240,10 +240,10 @@ def user_employee_list(request,store_id=None):
     manager_relations = Store_User_Relation.objects.filter(user=user, is_manager=True, store__enable=True)  # manager relations
 
     store = None
-    print(store_id)
     if store_id is None:
         relation = manager_relations.first()
-        store = relation.store
+        if relation is not None:
+            store = relation.store
     else:
         store = Store.objects.filter(id=store_id).first()
 

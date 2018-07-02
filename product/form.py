@@ -38,7 +38,29 @@ class CreateProductForm(forms.Form):
                 'size': '20',
                 'class': 'form-control'
             }
-    ))
+        ))
+
+    unit = forms.CharField(
+        label='產品單位',
+        max_length=255,
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': '請輸入產品單位'
+            }
+        ))
+
+    description = forms.CharField(
+        label='產品說明',
+        max_length=1024,
+        required=False,
+        widget=forms.Textarea(
+            attrs={
+                'class': 'form-control',
+                'placeholder': '請輸入商品說明'
+            }
+        ))
 
 
 class ProductForm(forms.ModelForm):
@@ -52,30 +74,47 @@ class ProductForm(forms.ModelForm):
                 'size': '20',
                 'class': 'form-control'
             }
-    ))
+        ))
 
     class Meta:
         model = Product
-        fields = ('name', 'category') #Note that we didn't mention user field here.
+        fields = ('name', 'category', 'unit', 'description')  #Note that we didn't mention user field here.
 
         widgets = {
             'name': forms.TextInput(
                 attrs={
                     'class': 'form-control',
                     'placeholder': '請輸入商品名稱'
-                })
+                }),
+            'unit': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': '請輸入商品單位'
+                }),
+            'description': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': '請輸入商品說明',
+                    'required': False
+                }),
         }
 
         labels = {
             'name': '商品名稱',
+            'unit': '商品單位',
+            'description': '商品說明',
         }
 
         max_length = {
             'name': 255,
+            'unit': 50,
+            'description': 1024
         }
 
         required = {
             'name': True,
+            'unit': False,
+            'description': False
         }
 
     def __init__(self, *args, **kwargs):
@@ -85,7 +124,7 @@ class ProductForm(forms.ModelForm):
         self.fields["category"] = forms.ModelChoiceField(
             label='商品類別',
             required=True,
-            queryset=Product_Category.objects.filter(store_id=storeId,enable=True),
+            queryset=Product_Category.objects.filter(store_id=storeId, enable=True),
             widget=forms.Select(attrs={
                 'class': 'form-control',
                 'title': '請選擇商品類別'
@@ -95,14 +134,16 @@ class ProductForm(forms.ModelForm):
 
         )
 
+        self.fields['description'].required = False
+
         if self.instance:
             inventory = Inventory.objects.filter(product=self.instance).first()
             rule = Safety_Inventory_Rule.objects.filter(inventory=inventory).first()
+            self.fields['description'].required = False
             if rule:
                 self.fields['safetyDays'].initial = rule.safety_days
             else:
                 self.fields['safetyDays'].initial = 1
-
 
 
 class ProductCategoryForm(forms.ModelForm):

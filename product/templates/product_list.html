@@ -49,8 +49,9 @@
               <thead>
                 <tr>
                     <th rowspan="1" colspan="1">刪除</th>
-                    <th rowspan="1" colspan="1">產品名稱</th>
                     <th rowspan="1" colspan="1">產品類別</th>
+                    <th rowspan="1" colspan="1">產品名稱</th>
+                    <th rowspan="1" colspan="1">產品單位</th>
                     <th rowspan="1" colspan="1">更新</th>
                     <th rowspan="1" colspan="1">管理庫存</th>
                 </tr>
@@ -60,10 +61,11 @@
               {% for p in products %}
                 <tr>
                   <th> <a class="btn btn-danger" href="{% url 'deleteProduct' productId=p.pk %}">刪除</a></th>
-                  <th> {{ p.name }}</th>
                   <th> {{ p.category.name }}</th>
-                  <th> <a class="btn btn-info" href="{% url 'updateProduct' productId=p.pk %}">更新</a></th>
-                  <th> <a class="btn btn-info" href="{% url 'inventoryDetail' productId=p.pk %}">管理庫存</a></th>
+                  <th> {{ p.name }}</th>
+                  <th> {{ p.unit }}</th>
+                  <th> <a class="btn btn-primary" href="{% url 'updateProduct' productId=p.pk %}">更新</a></th>
+                  <th> <a class="btn btn-success" href="{% url 'inventoryDetail' productId=p.pk %}">管理庫存</a></th>
 
                 </tr>
               {% empty %}
@@ -94,9 +96,8 @@
                 <tr>
                     <th rowspan="1" colspan="1">刪除</th>
                     <th rowspan="1" colspan="1">階級</th>
-                    <th rowspan="1" colspan="1">類別名稱</th>
                     <th rowspan="1" colspan="1">父類別名稱</th>
-
+                    <th rowspan="1" colspan="1">類別名稱</th>
                     <th rowspan="1" colspan="1">更新</th>
 
                 </tr>
@@ -107,13 +108,14 @@
                 <tr>
                   <th> <a class="btn btn-danger" href="{% url 'deleteProductCategory' categoryId=c.id %}">刪除</a></th>
                   <th> {{ c.level_of_product }}</th>
-                  <th> {{ c.name }}</th>
                   {% if c.parent_category.name is not None%}
                       <th>{{ c.parent_category.name }}</th>
                   {% else %}
                       <th>-</th>
                   {% endif %}
-                  <th> <a class="btn btn-info" href="{% url 'updateProductCategory' categoryId=c.id %}">更新</a></th>
+                  <th> {{ c.name }}</th>
+
+                  <th> <a class="btn btn-primary" href="{% url 'updateProductCategory' categoryId=c.id %}">更新</a></th>
                 </tr>
               {% empty %}
                   <tr><td colspan="4">此商店無產品類別資料</td></tr>

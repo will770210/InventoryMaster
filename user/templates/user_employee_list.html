@@ -14,11 +14,13 @@
 
 
     請選擇商店: <select name="store_id" id="store_id" class="form-control">
+        <option value="">請選擇商店</option>
+
         {% for relation in manager_relations %}
             <option value="{{ relation.store.id }}" {% if relation.store.id == store.id %} selected {% endif %}>{{ relation.store.name }}</option>
         {% endfor %}
     </select><br>
-
+    {% if store is not None %}
     <div class="card mb-3">
           <div class="card-header">員工列表 - {{ store.name }}</div>
           <div class="card-body">
@@ -49,7 +51,7 @@
           </div>
         </div>
     </div>
-
+    {% endif %}
 {% endblock %}
 
 {% block footer %}

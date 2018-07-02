@@ -10,7 +10,7 @@ from user.decorators import *
 @check_login
 def listStore(request):
     user = request.session.get('user')
-    relations = Store_User_Relation.objects.filter(user=user, is_manager=True, store__enable=True)
+    relations = Store_User_Relation.objects.filter(user=user, store__enable=True)
 
     stores = list([relation.store for relation in relations])
 
@@ -19,6 +19,7 @@ def listStore(request):
 
 
 @check_login
+@check_permission
 def deleteStore(request, storeId):
     user = request.session.get('user')
     store = Store.objects.filter(pk=storeId).first()
@@ -30,6 +31,7 @@ def deleteStore(request, storeId):
 
 
 @check_login
+@check_permission
 def updateStore(request, storeId):
     store = get_object_or_404(Store, pk=storeId)
     form = StoreForm(request.POST or None, instance=store)
@@ -68,6 +70,38 @@ def createStore(request):
 
     return render(request, 'store_create_form.html', {'form': form})
 
+@check_login
+def join_store(request):
+    form = JoinStoreForm(request)
 
-def joinStore(request):
-    pass
+    user = request.session.get('user')
+    if request.method == 'POST':
+        form = JoinStoreForm(request,request.POST)
+        if form.is_valid():
+
+            store = Store.objects.get(store_code=form.cleaned_data['store_code'])
+
+            store = Store_User_Relation.objects.create(
+                user=user,
+                store=store,
+                is_manager=False
+            )
+
+            store.save()
+
+            return redirect('listStore')
+
+            # store_code = request.POST.get('store_code')
+            # store = Store.objects.get(store_code=store_code)
+            # if store is not None:
+            #
+            #     releation = Store_User_Relation.objects.get(user=user, store__store_code=store_code)
+            #
+            #     if releation is None:
+
+
+
+
+
+
+    return render(request, 'store_join_from.html',{'form':form})

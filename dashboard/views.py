@@ -17,7 +17,7 @@ def dashboard_index(request):
     less_safety_inventories = []
     for store in stores:
         print(store.name)
-        inventories = Inventory.objects.filter(store=store, is_less_safety_inventory=True)
+        inventories = Inventory.objects.filter(store=store, is_less_safety_inventory=True, store__enable=True)
 
         storeInventory = StoreInventory()
         storeInventory.store = store

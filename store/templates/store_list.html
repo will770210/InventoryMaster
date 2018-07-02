@@ -45,8 +45,8 @@
                     <th>{{ s.phone }}</th>
                     <th>{{ s.address }}</th>
                     <th>{{ s.store_code }}</th>
-                    <th><a class="btn btn-success" href="{% url 'updateStore' storeId=s.id%}">更新</a></th>
-                    <th><a class="btn btn-info" href="{% url 'listProduct' storeId=s.id%}">產品列表</a></th>
+                    <th><a class="btn btn-primary" href="{% url 'updateStore' storeId=s.id%}">更新</a></th>
+                    <th><a class="btn btn-success" href="{% url 'listProduct' storeId=s.id%}">產品列表</a></th>
                   </tr>
               {% empty %}
                   <tr><th colspan="7">沒有商店資料</th></tr>
