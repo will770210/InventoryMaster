@@ -18,7 +18,8 @@
     
 <div class="card card-register mx-auto mt-5">
 
-      <div class="card-header">編輯的產品</div>
+      <div class="card-header">編輯的產品  <a class="btn btn-danger" href="{% url 'createProductCategory' storeId=store.id %}">新增類別</a>
+  </div>
       <div class="card-body">
         <form method="post" action="{% url 'updateProduct' productId=product.id %}">
 
