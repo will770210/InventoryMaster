@@ -153,7 +153,7 @@ def userActivate(request, uidb64, token):
 
     return render(request, 'message.html', {'title': title, 'content': content, 'buttonValue':buttonValue})
 
-
+@check_login
 def userResetPassword(request, uidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
@@ -249,11 +249,12 @@ def user_employee_list(request,store_id=None):
 
     employee_relations = Store_User_Relation.objects.filter(store=store, is_manager=False)  # manager relations
 
-    users = list([employee_relations.user for relation in employee_relations])
+    if employee_relations.count()>0:
+        users = list([employee_relation.user for employee_relation in employee_relations])
 
     return render(request,'user_employee_list.html',{'manager_relations':manager_relations, 'store':store, 'users':users})
 
-
+@check_login
 def user_employee_invitation(request):
     user = request.session.get('user')
 
